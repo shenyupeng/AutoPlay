@@ -2,7 +2,7 @@ package com.frank.autoplay.core;
 
 import android.view.ViewGroup;
 
-import com.frank.autoplay.Utils.L;
+import com.frank.autoplay.utils.L;
 
 import java.lang.ref.WeakReference;
 

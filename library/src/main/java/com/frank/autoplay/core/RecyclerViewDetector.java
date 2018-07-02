@@ -4,7 +4,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.frank.autoplay.AutoPlayItem;
-import com.frank.autoplay.Utils.L;
+import com.frank.autoplay.utils.L;
 
 import static com.frank.autoplay.core.ItemViewHelper.isActivated;
 

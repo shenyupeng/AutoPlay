@@ -1,4 +1,4 @@
-package com.frank.autoplay.Utils;
+package com.frank.autoplay.utils;
 
 import android.util.Log;
 

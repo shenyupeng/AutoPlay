@@ -4,7 +4,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.frank.autoplay.AutoPlayItem;
-import com.frank.autoplay.Utils.L;
+import com.frank.autoplay.utils.L;
 
 import static com.frank.autoplay.core.ItemViewHelper.isActivated;
 import static com.frank.autoplay.core.ItemViewHelper.isHorizontalInvisibleEnough;

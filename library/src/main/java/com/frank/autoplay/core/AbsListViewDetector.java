@@ -4,13 +4,13 @@ import android.view.View;
 import android.widget.AbsListView;
 
 import com.frank.autoplay.AutoPlayItem;
-import com.frank.autoplay.Utils.L;
+import com.frank.autoplay.utils.L;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.frank.autoplay.Utils.HookUtils.hookOnScrollListener;
-import static com.frank.autoplay.Utils.HookUtils.hookRecyclerListener;
+import static com.frank.autoplay.utils.HookUtils.hookOnScrollListener;
+import static com.frank.autoplay.utils.HookUtils.hookRecyclerListener;
 import static com.frank.autoplay.core.ItemViewHelper.isActivated;
 
 /**

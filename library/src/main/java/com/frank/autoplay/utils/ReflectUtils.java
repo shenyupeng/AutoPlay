@@ -1,4 +1,4 @@
-package com.frank.autoplay.Utils;
+package com.frank.autoplay.utils;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
