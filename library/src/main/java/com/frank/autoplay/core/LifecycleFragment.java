@@ -13,11 +13,9 @@ public class LifecycleFragment extends Fragment {
 
     private DetectorManager mDetectorManager = new DetectorManager();
 
-    public LifecycleFragment() {
-    }
+    private boolean mKeep;
 
-    public void setKeep(boolean isKeep) {
-        mDetectorManager.setKeep(isKeep);
+    public LifecycleFragment() {
     }
 
     public void startDetect(ViewGroup viewGroup) {
@@ -28,23 +26,27 @@ public class LifecycleFragment extends Fragment {
         mDetectorManager.stop(viewGroup);
     }
 
+    public void setKeep(boolean keep) {
+        this.mKeep = keep;
+    }
+
     @Override
     public void onResume() {
         super.onResume();
-        if (mDetectorManager.isKeep()) {
-            mDetectorManager.resumeAll();
+        if (mKeep) {
+            mDetectorManager.resume();
         } else {
-            mDetectorManager.startAll();
+            mDetectorManager.start();
         }
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        if (mDetectorManager.isKeep()) {
-            mDetectorManager.pauseAll();
+        if (mKeep) {
+            mDetectorManager.pause();
         } else {
-            mDetectorManager.stopAll();
+            mDetectorManager.stop();
         }
     }
 

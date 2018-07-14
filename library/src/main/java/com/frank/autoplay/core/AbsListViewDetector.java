@@ -9,15 +9,15 @@ import com.frank.autoplay.utils.L;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.frank.autoplay.core.ItemViewHelper.isActivated;
 import static com.frank.autoplay.utils.HookUtils.hookOnScrollListener;
 import static com.frank.autoplay.utils.HookUtils.hookRecyclerListener;
-import static com.frank.autoplay.core.ItemViewHelper.isActivated;
 
 /**
  * Created by frank on 2018/3/9.
  */
 
-public class AbsListViewDetector extends ExclusiveDetector<AbsListView> {
+class AbsListViewDetector extends ExclusiveDetector<AbsListView> {
 
     private DirectionCalculator<AbsListView> mDirectionCalculator;
 
@@ -64,7 +64,7 @@ public class AbsListViewDetector extends ExclusiveDetector<AbsListView> {
             }
 
         } else {
-            L.i(this, "bindDetectListener: listener has bind already!");
+            L.i(this, "bindDetectListener", "listener has bind already!");
         }
     }
 
@@ -88,7 +88,7 @@ public class AbsListViewDetector extends ExclusiveDetector<AbsListView> {
                 mProxyRecyclerListener.clear();
             }
         } else {
-            L.i(this, "unbindDetectListener: not bind listener yet!");
+            L.i(this, "unbindDetectListener", "Not bind listener yet!");
         }
     }
 
@@ -114,7 +114,7 @@ public class AbsListViewDetector extends ExclusiveDetector<AbsListView> {
 
         @Override
         public void onMovedToScrapHeap(View view) {
-            L.i(this, "onMovedToScrapHeap " + view);
+            L.i(this, "onMovedToScrapHeap", L.simpleObject(view));
             AutoPlayItem autoPlayItem = ItemViewHelper.findAutoPlayItem(view);
             if (autoPlayItem != null && isActivated(autoPlayItem.getAutoPlayView())) {
                 deactivate(autoPlayItem);

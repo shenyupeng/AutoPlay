@@ -37,11 +37,6 @@ public class ViewPagerDetector extends ExclusiveDetector<ViewPager> {
         return mDirectionCalculator;
     }
 
-    @Override
-    void onDetecting() {
-        super.onDetecting();
-    }
-
     class DetectListener extends ViewPager.SimpleOnPageChangeListener {
         @Override
         public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {

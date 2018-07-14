@@ -11,7 +11,6 @@ import android.widget.AbsListView;
 
 class DetectorFactory {
 
-
     static Detector create(ViewGroup viewGroup) {
         if (viewGroup instanceof AbsListView) {
             return new AbsListViewDetector((AbsListView) viewGroup);
@@ -20,6 +19,6 @@ class DetectorFactory {
         } else if (viewGroup instanceof ViewPager) {
             return new ViewPagerDetector((ViewPager) viewGroup);
         }
-        return null;
+        throw new IllegalStateException(viewGroup.getClass().getName() + " is not support!");
     }
 }

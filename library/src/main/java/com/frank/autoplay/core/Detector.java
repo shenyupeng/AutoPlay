@@ -2,8 +2,6 @@ package com.frank.autoplay.core;
 
 import android.view.ViewGroup;
 
-import com.frank.autoplay.utils.L;
-
 import java.lang.ref.WeakReference;
 
 /**
@@ -16,11 +14,11 @@ public abstract class Detector<TargetView extends ViewGroup> {
 
     private State mState;
 
-    /*package*/ Detector(TargetView target) {
+    Detector(TargetView target) {
         mTargetViewRef = new WeakReference<>(target);
     }
 
-    /*package*/ TargetView getTargetView() {
+    TargetView getTargetView() {
         return mTargetViewRef.get();
     }
 
@@ -30,20 +28,33 @@ public abstract class Detector<TargetView extends ViewGroup> {
 
     void setState(State state) {
         this.mState = state;
-
     }
 
     void detect() {
+        postDetect();
+    }
+
+    private void innerDetect() {
         if (canDetect()) {
-            long start = System.currentTimeMillis();
             onDetecting();
-            L.i(this, "detect time:" + (System.currentTimeMillis() - start));
         }
     }
 
+    void postDetect() {
+        getTargetView().removeCallbacks(mDetectEvent);
+        getTargetView().postOnAnimation(mDetectEvent);
+    }
+
+    private Runnable mDetectEvent = new Runnable() {
+        @Override
+        public void run() {
+            innerDetect();
+        }
+    };
+
     private boolean canDetect() {
         final TargetView targetView = getTargetView();
-        final boolean detectableState = mState == State.STARTED;
+        final boolean detectableState = mState == State.RESUMED;
         final boolean detectableTarget = targetView != null && targetView.getChildCount() > 0;
         return detectableState && detectableTarget;
     }
@@ -58,14 +69,16 @@ public abstract class Detector<TargetView extends ViewGroup> {
 
     public abstract void release();
 
+    /*package*/
     abstract void onDetecting();
 
     enum State {
         INITIALIZED,
         STARTED,
+        RESUMED,
         PAUSED,
         STOPPED,
-        RELEASED
+        RELEASED;
     }
 
 }

@@ -4,8 +4,11 @@ import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Build;
+import android.support.annotation.NonNull;
+import android.view.View;
 import android.view.ViewGroup;
 
+import com.frank.autoplay.core.ItemViewHelper;
 import com.frank.autoplay.core.LifecycleFragment;
 
 /**
@@ -15,21 +18,29 @@ import com.frank.autoplay.core.LifecycleFragment;
 public class AutoPlay {
 
 
-    public static void startDetect(Activity activity, ViewGroup viewGroup) {
+    public static void startDetect(@NonNull Activity activity, @NonNull ViewGroup viewGroup) {
         final LifecycleFragment fragment = makeSureInitialized(activity);
         if (fragment != null) {
             fragment.startDetect(viewGroup);
         }
     }
 
-    public static void stopDetect(Activity activity, ViewGroup viewGroup) {
+    public static void stopDetect(@NonNull Activity activity, @NonNull ViewGroup viewGroup) {
         final LifecycleFragment fragment = makeSureInitialized(activity);
         if (fragment != null) {
             fragment.stopDetect(viewGroup);
         }
     }
 
-    public static void keep(Activity activity, boolean isKeep) {
+    public static AutoPlayItem findAutoPlayItem(final View view) {
+        return ItemViewHelper.findAutoPlayItem(view);
+    }
+
+    public static void bindAutoPlayItem(View view, AutoPlayItem autoPlayItem) {
+        ItemViewHelper.bindAutoPlayItem(view, autoPlayItem);
+    }
+
+    public static void keep(@NonNull Activity activity, boolean isKeep) {
         final LifecycleFragment fragment = makeSureInitialized(activity);
         if (fragment != null) {
             fragment.setKeep(isKeep);

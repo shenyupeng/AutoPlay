@@ -12,13 +12,13 @@ public class ViewPagerDirectionCalculator extends DirectionCalculator<ViewPager>
 
     private float mCurrentPositionOffset;
 
-    private Direction mCurrentDirection = DirectionCalculator.Direction.RIGHT;
+    private Direction mDirection = DirectionCalculator.Direction.RIGHT;
 
     ViewPagerDirectionCalculator(ViewPager viewPager) {
         this.mViewPager = viewPager;
         this.mViewPager.addOnPageChangeListener(this);
     }
-    
+
     @Override
     ViewPager getTargetView() {
         return mViewPager;
@@ -26,7 +26,7 @@ public class ViewPagerDirectionCalculator extends DirectionCalculator<ViewPager>
 
     @Override
     Direction calculate() {
-        return mCurrentDirection;
+        return mDirection;
     }
 
     @Override
@@ -38,11 +38,11 @@ public class ViewPagerDirectionCalculator extends DirectionCalculator<ViewPager>
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
         if (mCurrentPositionOffset > positionOffset) {
-            mCurrentDirection = Direction.RIGHT;
+            mDirection = Direction.RIGHT;
         } else if (mCurrentPositionOffset < positionOffset) {
-            mCurrentDirection = Direction.LEFT;
+            mDirection = Direction.LEFT;
         } else {
-            mCurrentDirection = Direction.IDLE;
+            mDirection = Direction.IDLE;
         }
         mCurrentPositionOffset = positionOffset;
     }

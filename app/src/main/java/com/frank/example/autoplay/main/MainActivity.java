@@ -11,6 +11,7 @@ import com.frank.autoplay.AutoPlay;
 import com.frank.example.autoplay.R;
 import com.frank.example.autoplay.tab.TabFragment;
 import com.frank.example.autoplay.tab.TabListFragment;
+import com.frank.example.autoplay.tab.TabNestRecyclerViewFragment;
 import com.frank.example.autoplay.tab.TabRecyclerViewFragment;
 
 public class MainActivity extends AppCompatActivity {
@@ -57,9 +58,13 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public Fragment getItem(int position) {
-            TabFragment fragment;
-            if (position % 2 == 0) {
+            TabFragment fragment = null;
+            if (position == 0) {
                 fragment = new TabListFragment();
+            } else if (position == 1){
+                fragment = new TabNestRecyclerViewFragment();
+            } else if (position == 2){
+                fragment = new TabNestRecyclerViewFragment();
             } else {
                 fragment = new TabRecyclerViewFragment();
             }

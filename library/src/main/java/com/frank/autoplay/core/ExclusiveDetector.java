@@ -18,11 +18,11 @@ import static com.frank.autoplay.core.ItemViewHelper.isVisibleEnough;
  * Created by frank on 2018/3/22.
  */
 
-public abstract class ExclusiveDetector<TargetView extends ViewGroup> extends Detector<TargetView> {
+abstract class ExclusiveDetector<TargetView extends ViewGroup> extends Detector<TargetView> {
 
     ExclusiveDetector(TargetView target) {
         super(target);
-        setState(Detector.State.INITIALIZED);
+        setState(State.INITIALIZED);
     }
 
     abstract void bindDetectListener();
@@ -33,33 +33,33 @@ public abstract class ExclusiveDetector<TargetView extends ViewGroup> extends De
 
     @Override
     void setState(Detector.State state) {
+        L.i(this, "setState:", (getState() == null ? null : getState().name()) + " -> " + state.name());
         super.setState(state);
-        L.i(this, "setState:" + state.name());
     }
 
     @Override
     public void start() {
         bindDetectListener();
-        setState(Detector.State.STARTED);
+        setState(State.STARTED);
+        resume();
         detect();
     }
 
     @Override
     public void resume() {
-        setState(Detector.State.STARTED);
+        setState(State.RESUMED);
     }
-
 
     @Override
     public void pause() {
-        setState(Detector.State.PAUSED);
+        setState(State.PAUSED);
     }
 
     @Override
     public void stop() {
         unbindDetectListener();
         deactivate();
-        setState(Detector.State.STOPPED);
+        setState(State.STOPPED);
     }
 
     @Override
@@ -68,22 +68,23 @@ public abstract class ExclusiveDetector<TargetView extends ViewGroup> extends De
         if (directionCalculator != null) {
             directionCalculator.release();
         }
-        setState(Detector.State.RELEASED);
+        setState(State.RELEASED);
     }
-
 
     @Override
     void onDetecting() {
+        L.i(this, "onDetecting", "START");
+        long start = System.currentTimeMillis();
+
         AutoPlayItem activatedItem = findActivatedAutoPlayableItem();
-
-        final DirectionCalculator<TargetView> directionCalculator = getDirectionCalculator();
-        final DirectionCalculator.Direction direction = directionCalculator.calculate();
-
+        final DirectionCalculator.Direction direction = calculateDirection();
         if (activatedItem == null) {
             final AutoPlayItem item = findAutoPlayableItem(direction, 0);
             if (item != null) {
                 activate(item);
                 activatedItem = item;
+            } else {
+                L.i(this, "onDetecting", "Can't find detectable item");
             }
         } else {
             final int activatedIndex = findActivatedAutoPlayableItemIndex();
@@ -93,8 +94,7 @@ public abstract class ExclusiveDetector<TargetView extends ViewGroup> extends De
                     deactivate(activatedItem);
                     activatedItem = null;
                 } else {
-                    activatedItem.onActivationKeeping();
-                    L.i(this, "onDetecting:" + "activation not changed!" + "activatedItem:" + activatedItem.getAutoPlayView().getClass().getSimpleName() + activatedItem.hashCode() + " direction:" + direction.name());
+                    keepActivation(activatedItem);
                 }
             } else if (item != activatedItem) {
                 deactivate(activatedItem);
@@ -104,24 +104,29 @@ public abstract class ExclusiveDetector<TargetView extends ViewGroup> extends De
                 deactivate(activatedItem);
                 activatedItem = null;
             } else {
-                activatedItem.onActivationKeeping();
-                L.i(this, "onDetecting:" + "activation not changed!" + "activatedItem:" + activatedItem.getAutoPlayView().getClass().getSimpleName() + activatedItem.hashCode() + " direction:" + direction.name());
+                keepActivation(activatedItem);
             }
         }
+        L.i(this, "onDetecting", "END " + "(" + (System.currentTimeMillis() - start) + ")" + " activated:" + L.simpleObject(activatedItem) + " direction:" + direction.name());
+    }
 
-        L.i(this, "onDetecting:" + "activatedItem:" +
-                (activatedItem == null ? "null" : (activatedItem.getAutoPlayView().getClass().getSimpleName() + activatedItem.hashCode())) +
-                " direction:" + direction.name());
+    DirectionCalculator.Direction calculateDirection() {
+        return getDirectionCalculator().calculate();
+    }
+
+    void keepActivation(AutoPlayItem item) {
+        L.i(this, "keepActivation", L.simpleObject(item));
+        item.onActivationKeeping();
     }
 
     void activate(AutoPlayItem item) {
-        L.i(this, "activate:" + item.getAutoPlayView().getClass().getSimpleName() + item.hashCode());
+        L.i(this, "activate", L.simpleObject(item));
         item.activate();
         ItemViewHelper.setActivate(item.getAutoPlayView(), true);
     }
 
     void deactivate(AutoPlayItem item) {
-        L.i(this, "deactivate:" + item.getAutoPlayView().getClass().getSimpleName() + item.hashCode());
+        L.i(this, "deactivate", L.simpleObject(item));
         item.deactivate();
         ItemViewHelper.setActivate(item.getAutoPlayView(), false);
     }

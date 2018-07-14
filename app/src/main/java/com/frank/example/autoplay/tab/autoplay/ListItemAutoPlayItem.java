@@ -61,7 +61,7 @@ public class ListItemAutoPlayItem implements AutoPlayItem {
     public void activate() {
         if (mActiveAnimator == null) {
             mActiveAnimator = ValueAnimator.ofFloat(0, 1);
-            mActiveAnimator.setDuration(500);
+            mActiveAnimator.setDuration(1000);
             mActiveAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
                 @Override
                 public void onAnimationUpdate(ValueAnimator animation) {

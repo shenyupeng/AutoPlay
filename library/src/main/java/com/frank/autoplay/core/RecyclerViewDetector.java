@@ -61,7 +61,7 @@ public class RecyclerViewDetector extends ExclusiveDetector<RecyclerView> {
         @Override
         public void onViewRecycled(RecyclerView.ViewHolder holder) {
             final View view = holder.itemView;
-            L.i(this, "onViewRecycled " + view);
+            L.i(this, "onViewRecycled", L.simpleObject(view));
             AutoPlayItem detectableItem = ItemViewHelper.findAutoPlayItem(view);
             if (detectableItem != null && isActivated(detectableItem.getAutoPlayView())) {
                 deactivate(detectableItem);

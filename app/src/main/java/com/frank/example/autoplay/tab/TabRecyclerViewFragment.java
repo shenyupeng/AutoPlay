@@ -10,10 +10,11 @@ import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.TextView;
 
+import com.frank.autoplay.AutoPlay;
 import com.frank.autoplay.core.ItemViewHelper;
 import com.frank.example.autoplay.R;
 import com.frank.example.autoplay.tab.autoplay.ListItemAutoPlayItem;
-import com.frank.example.autoplay.tab.autoplay.ViewPagerItemAutoPlayItem;
+import com.frank.example.autoplay.tab.autoplay.ViewGroupAutoPlayItem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,7 +48,7 @@ public class TabRecyclerViewFragment extends TabFragment {
             public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
                 final View itemView = LayoutInflater.from(parent.getContext()).inflate(android.R.layout.simple_list_item_1, parent, false);
                 itemView.setLayoutParams(new AbsListView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 400));
-                ItemViewHelper.bindAutoPlayItem(itemView, new ListItemAutoPlayItem((TextView) itemView));
+                AutoPlay.bindAutoPlayItem(itemView, new ListItemAutoPlayItem((TextView) itemView));
                 return new ViewHolder(itemView) {
                 };
             }
@@ -55,7 +56,7 @@ public class TabRecyclerViewFragment extends TabFragment {
             @Override
             public void onBindViewHolder(ViewHolder holder, int position) {
                 TextView textView = (TextView) holder.itemView;
-                ListItemAutoPlayItem item = (ListItemAutoPlayItem) ItemViewHelper.findAutoPlayItem(textView);
+                ListItemAutoPlayItem item = (ListItemAutoPlayItem) AutoPlay.findAutoPlayItem(textView);
                 ColorItem colorItem = colorItems.get(position);
                 item.setColorItem(colorItem);
                 textView.setText(colorItem.getText());
@@ -83,6 +84,6 @@ public class TabRecyclerViewFragment extends TabFragment {
         linearLayoutManager.setOrientation(getIndex() == 3 ? HORIZONTAL : VERTICAL);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(mAdapter);
-        ItemViewHelper.bindAutoPlayItem(recyclerView, new ViewPagerItemAutoPlayItem(recyclerView));
+        AutoPlay.bindAutoPlayItem(recyclerView, new ViewGroupAutoPlayItem(recyclerView));
     }
 }

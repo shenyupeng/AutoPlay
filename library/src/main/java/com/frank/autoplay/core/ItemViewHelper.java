@@ -12,7 +12,7 @@ import com.frank.autoplay.R;
 
 public class ItemViewHelper {
 
-    public static float calculateVisibleRatio(View view) {
+    private static float calculateVisibleRatio(View view) {
         ensureRect();
         final Rect rect = sRect;
         final boolean visible = view.getLocalVisibleRect(rect);
@@ -29,7 +29,7 @@ public class ItemViewHelper {
         return ratio;
     }
 
-    public static float calculateVerticalVisibleRatio(View view) {
+    static float calculateVerticalVisibleRatio(View view) {
         ensureRect();
         final Rect rect = sRect;
         final boolean visible = view.getLocalVisibleRect(rect);
@@ -44,7 +44,7 @@ public class ItemViewHelper {
         return ratio;
     }
 
-    public static float calculateHorizontalVisibleRatio(View view) {
+    static float calculateHorizontalVisibleRatio(View view) {
         ensureRect();
         final Rect rect = sRect;
         final boolean visible = view.getLocalVisibleRect(rect);
@@ -65,36 +65,36 @@ public class ItemViewHelper {
         sRect = sRect == null ? new Rect() : sRect;
     }
 
-    public static boolean isVerticalInvisibleEnough(View view, float ratio) {
+    static boolean isVerticalInvisibleEnough(View view, float ratio) {
         return 1 - calculateVerticalVisibleRatio(view) >= ratio;
     }
 
-    public static boolean isHorizontalInvisibleEnough(View view, float ratio) {
+    static boolean isHorizontalInvisibleEnough(View view, float ratio) {
         return 1 - calculateHorizontalVisibleRatio(view) >= ratio;
     }
 
-    public static boolean isInvisibleEnough(View view, float ratio) {
+    static boolean isInvisibleEnough(View view, float ratio) {
         return 1 - calculateVisibleRatio(view) >= ratio;
     }
 
-    public static boolean isVerticalVisibleEnough(View view, float ratio) {
+    static boolean isVerticalVisibleEnough(View view, float ratio) {
         return calculateVerticalVisibleRatio(view) >= ratio;
     }
 
-    public static boolean isHorizontalVisibleEnough(View view, float ratio) {
+    static boolean isHorizontalVisibleEnough(View view, float ratio) {
         return calculateHorizontalVisibleRatio(view) >= ratio;
     }
 
-    public static boolean isVisibleEnough(View view, float ratio) {
+    static boolean isVisibleEnough(View view, float ratio) {
         return calculateVisibleRatio(view) >= ratio;
     }
 
-    public static boolean isActivated(View view) {
+    static boolean isActivated(View view) {
         final Object object = view.getTag(R.id.tag_item_view_detector_activation_state);
         return object != null && (Boolean) object;
     }
 
-    public static void setActivate(View view, boolean isActivate) {
+    static void setActivate(View view, boolean isActivate) {
         view.setTag(R.id.tag_item_view_detector_activation_state, isActivate);
     }
 

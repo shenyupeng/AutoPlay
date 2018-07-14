@@ -11,17 +11,17 @@ import com.frank.autoplay.AutoPlayItem;
  * Created by frank on 2018/7/1.
  */
 
-public class ViewPagerItemAutoPlayItem implements AutoPlayItem {
+public class ViewGroupAutoPlayItem implements AutoPlayItem {
 
-    private ViewGroup mViewPagerItemView;
+    private ViewGroup mViewGroup;
 
-    public ViewPagerItemAutoPlayItem(ViewGroup view) {
-        this.mViewPagerItemView = view;
+    public ViewGroupAutoPlayItem(ViewGroup view) {
+        this.mViewGroup = view;
     }
 
     @Override
     public View getAutoPlayView() {
-        return mViewPagerItemView;
+        return mViewGroup;
     }
 
     @Override
@@ -41,12 +41,12 @@ public class ViewPagerItemAutoPlayItem implements AutoPlayItem {
 
     @Override
     public void deactivate() {
-        AutoPlay.stopDetect((Activity) mViewPagerItemView.getContext(), mViewPagerItemView);
+        AutoPlay.stopDetect((Activity) mViewGroup.getContext(), mViewGroup);
     }
 
     @Override
     public void activate() {
-        AutoPlay.startDetect((Activity) mViewPagerItemView.getContext(), mViewPagerItemView);
+        AutoPlay.startDetect((Activity) mViewGroup.getContext(), mViewGroup);
     }
 
     @Override

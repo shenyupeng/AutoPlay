@@ -6,11 +6,11 @@ import android.widget.AbsListView;
  * Created by frank on 2018/3/23.
  */
 
-public class AbsListViewDirectionCalculator extends VerticalCalculator<AbsListView> {
+class AbsListViewDirectionCalculator extends VerticalCalculator<AbsListView> {
 
     private AbsListView mListView;
 
-    public AbsListViewDirectionCalculator(AbsListView listView) {
+    AbsListViewDirectionCalculator(AbsListView listView) {
         this.mListView = listView;
     }
 

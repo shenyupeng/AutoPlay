@@ -12,10 +12,11 @@ import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.frank.autoplay.AutoPlay;
 import com.frank.autoplay.core.ItemViewHelper;
 import com.frank.example.autoplay.R;
 import com.frank.example.autoplay.tab.autoplay.ListItemAutoPlayItem;
-import com.frank.example.autoplay.tab.autoplay.ViewPagerItemAutoPlayItem;
+import com.frank.example.autoplay.tab.autoplay.ViewGroupAutoPlayItem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,7 +59,7 @@ public class TabListFragment extends TabFragment {
         super.onViewCreated(view, savedInstanceState);
         AbsListView absListView = (AbsListView) view;
         absListView.setAdapter(mAdapter);
-        ItemViewHelper.bindAutoPlayItem(absListView, new ViewPagerItemAutoPlayItem(absListView));
+        AutoPlay.bindAutoPlayItem(absListView, new ViewGroupAutoPlayItem(absListView));
     }
 
 
@@ -100,12 +101,12 @@ public class TabListFragment extends TabFragment {
                 textView.setGravity(Gravity.CENTER);
                 linearLayout.addView(textView, new AbsListView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, displayWidth/3 * 2));
                 convertView = linearLayout;
-                ItemViewHelper.bindAutoPlayItem(convertView, new ListItemAutoPlayItem(textView));
+                AutoPlay.bindAutoPlayItem(convertView, new ListItemAutoPlayItem(textView));
             } else {
                 textView = (TextView) ((ViewGroup) convertView).getChildAt(0);
             }
             ColorItem colorItem = getItem(position);
-            ListItemAutoPlayItem item = (ListItemAutoPlayItem) ItemViewHelper.findAutoPlayItem(convertView);
+            ListItemAutoPlayItem item = (ListItemAutoPlayItem) AutoPlay.findAutoPlayItem(convertView);
             item.setColorItem(colorItem);
             textView.setText(colorItem.getText());
             return convertView;
