@@ -32,11 +32,11 @@ public class AutoPlay {
         }
     }
 
-    public static AutoPlayItem findAutoPlayItem(final View view) {
+    public static AutoPlayItem findAutoPlayItem(@NonNull final View view) {
         return ItemViewHelper.findAutoPlayItem(view);
     }
 
-    public static void bindAutoPlayItem(View view, AutoPlayItem autoPlayItem) {
+    public static void bindAutoPlayItem(@NonNull View view, @NonNull AutoPlayItem autoPlayItem) {
         ItemViewHelper.bindAutoPlayItem(view, autoPlayItem);
     }
 
