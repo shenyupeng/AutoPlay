@@ -107,7 +107,7 @@ abstract class ExclusiveDetector<TargetView extends ViewGroup> extends Detector<
                 keepActivation(activatedItem);
             }
         }
-        L.i(this, "onDetecting", "END " + "(" + (System.currentTimeMillis() - start) + ")" + " activated:" + L.simpleObject(activatedItem) + " direction:" + direction.name());
+        L.i(this, "onDetecting", "END " + "(" + (System.currentTimeMillis() - start) + ")" + " activated:" + L.toString(activatedItem) + " direction:" + direction.name());
     }
 
     DirectionCalculator.Direction calculateDirection() {
@@ -115,18 +115,18 @@ abstract class ExclusiveDetector<TargetView extends ViewGroup> extends Detector<
     }
 
     void keepActivation(AutoPlayItem item) {
-        L.i(this, "keepActivation", L.simpleObject(item));
+        L.i(this, "keepActivation", L.toString(item));
         item.onActivationKeeping();
     }
 
     void activate(AutoPlayItem item) {
-        L.i(this, "activate", L.simpleObject(item));
+        L.i(this, "activate", L.toString(item));
         item.activate();
         ItemViewHelper.setActivate(item.getAutoPlayView(), true);
     }
 
     void deactivate(AutoPlayItem item) {
-        L.i(this, "deactivate", L.simpleObject(item));
+        L.i(this, "deactivate", L.toString(item));
         item.deactivate();
         ItemViewHelper.setActivate(item.getAutoPlayView(), false);
     }

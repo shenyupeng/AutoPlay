@@ -12,7 +12,7 @@ import static com.frank.autoplay.core.ItemViewHelper.isActivated;
  * Created by frank on 2018/3/15.
  */
 
-public class RecyclerViewDetector extends ExclusiveDetector<RecyclerView> {
+class RecyclerViewDetector extends ExclusiveDetector<RecyclerView> {
 
     private DetectListener mDetectListener = new DetectListener();
 
@@ -61,7 +61,7 @@ public class RecyclerViewDetector extends ExclusiveDetector<RecyclerView> {
         @Override
         public void onViewRecycled(RecyclerView.ViewHolder holder) {
             final View view = holder.itemView;
-            L.i(this, "onViewRecycled", L.simpleObject(view));
+            L.i(this, "onViewRecycled", L.toString(view));
             AutoPlayItem detectableItem = ItemViewHelper.findAutoPlayItem(view);
             if (detectableItem != null && isActivated(detectableItem.getAutoPlayView())) {
                 deactivate(detectableItem);

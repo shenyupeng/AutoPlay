@@ -6,7 +6,7 @@ import android.support.v4.view.ViewPager;
  * Created by frank on 2018/3/12.
  */
 
-public class ViewPagerDetector extends ExclusiveDetector<ViewPager> {
+class ViewPagerDetector extends ExclusiveDetector<ViewPager> {
 
     private DetectListener mDetectListener = new DetectListener();
 

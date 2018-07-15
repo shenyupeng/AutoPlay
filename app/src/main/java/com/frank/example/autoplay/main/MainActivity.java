@@ -15,39 +15,15 @@ import com.frank.example.autoplay.tab.TabNestRecyclerViewFragment;
 import com.frank.example.autoplay.tab.TabRecyclerViewFragment;
 
 public class MainActivity extends AppCompatActivity {
-    private ViewPager mViewPager;
-
-    private FragmentStatePagerAdapter mFragmentAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
 
-        mViewPager = findViewById(R.id.viewpager);
-        mFragmentAdapter = new FragmentAdapter(getSupportFragmentManager());
-        mViewPager.setAdapter(mFragmentAdapter);
-        AutoPlay.startDetect(this, mViewPager);
-    }
-
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
+        ViewPager viewPager = findViewById(R.id.viewpager);
+        viewPager.setAdapter(new FragmentAdapter(getSupportFragmentManager()));
+        AutoPlay.startDetect(this, viewPager);
     }
 
     private static class FragmentAdapter extends FragmentStatePagerAdapter {
@@ -58,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public Fragment getItem(int position) {
-            TabFragment fragment = null;
+            TabFragment fragment;
             if (position == 0) {
                 fragment = new TabListFragment();
             } else if (position == 1){

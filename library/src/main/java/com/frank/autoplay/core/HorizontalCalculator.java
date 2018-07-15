@@ -7,7 +7,7 @@ import android.view.ViewGroup;
  * Created by frank on 2018/3/22.
  */
 
-public abstract class HorizontalCalculator<TargetView extends ViewGroup> extends DirectionCalculator<TargetView> {
+abstract class HorizontalCalculator<TargetView extends ViewGroup> extends DirectionCalculator<TargetView> {
 
     private DirectionCalculator.Direction mDirection = DirectionCalculator.Direction.RIGHT;
 

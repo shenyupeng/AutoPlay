@@ -21,7 +21,7 @@ public class L {
         return -1;
     }
 
-    public static String simpleObject(Object o) {
+    public static String toString(Object o) {
         return o == null ? "null" : String.format(Locale.getDefault(), "[%s:%d]", o.getClass().getSimpleName(), o.hashCode());
     }
 

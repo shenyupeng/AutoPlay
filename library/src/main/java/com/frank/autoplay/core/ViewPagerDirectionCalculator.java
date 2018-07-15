@@ -6,7 +6,7 @@ import android.support.v4.view.ViewPager;
  * Created by frank on 2018/3/23.
  */
 
-public class ViewPagerDirectionCalculator extends DirectionCalculator<ViewPager> implements ViewPager.OnPageChangeListener {
+class ViewPagerDirectionCalculator extends DirectionCalculator<ViewPager> implements ViewPager.OnPageChangeListener {
 
     private ViewPager mViewPager;
 

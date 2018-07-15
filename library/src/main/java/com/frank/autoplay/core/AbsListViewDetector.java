@@ -114,7 +114,7 @@ class AbsListViewDetector extends ExclusiveDetector<AbsListView> {
 
         @Override
         public void onMovedToScrapHeap(View view) {
-            L.i(this, "onMovedToScrapHeap", L.simpleObject(view));
+            L.i(this, "onMovedToScrapHeap", L.toString(view));
             AutoPlayItem autoPlayItem = ItemViewHelper.findAutoPlayItem(view);
             if (autoPlayItem != null && isActivated(autoPlayItem.getAutoPlayView())) {
                 deactivate(autoPlayItem);
